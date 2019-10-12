@@ -20,6 +20,7 @@ import { DialogModule } from 'primeng/dialog';
 import { MessageService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { RestaurantsService } from './services/restaurants.service';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { RestaurantsService } from './services/restaurants.service';
     HttpClientModule,
     FormsModule,
     ToastModule,
-    CardModule
+    CardModule,
+    InputTextModule
   ],
   providers: [
     UsersService,

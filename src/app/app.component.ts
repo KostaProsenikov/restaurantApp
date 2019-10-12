@@ -17,6 +17,7 @@ export class AppComponent implements OnInit, OnChanges, OnDestroy {
   message: any;
   currentUser: User;
   restaurantsArr: Restaurant[] = [];
+  isDisabledArr: number[] = [];
 
   constructor(private userService: UsersService,
               private messageService: MessageService,
@@ -39,11 +40,32 @@ export class AppComponent implements OnInit, OnChanges, OnDestroy {
     );
   }
 
+  checkForm(id: number) {
+    const restaurant = this.restaurantsArr.filter((rest: Restaurant) => rest.id === id)[0];
+    console.log('restaurant', restaurant);
+    if (restaurant.title.length && restaurant.opinion.length) {
+      this.isDisabledArr.push(restaurant.id);
+    } else {
+      this.isDisabledArr = this.isDisabledArr.filter((restId: number) => restId !== id);
+    }
+  }
+
+  submitForm(restaurant: Restaurant) {
+     this.restaurantsServ.updateRestaurant(restaurant, restaurant.id).subscribe(
+       (data: any) => this.onSuccessUpdateRestaurant(data),
+       (err: any)  => this.onError(err)
+     );
+  }
+
   getRestaurantsData() {
     this.restaurantsServ.getAllRestaurants().subscribe(
       (data: any) => this.onSuccessGetRestaurants(data),
       (err)       => this.onError(err)
     );
+  }
+
+  onSuccessUpdateRestaurant(restaurant: Restaurant) {
+    this.messageService.add({severity: 'success', summary: 'Success', detail: `Successfully updated ${restaurant.title}!` });
   }
 
   onSuccessGetUser(data: User) {

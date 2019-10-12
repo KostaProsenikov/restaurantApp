@@ -14,13 +14,15 @@
         <img src="Card" src="/assets/pictures/usercard.png">
       </p-header>
       <div>
-        <h2>ID: {{ currentUser.id }}</h2>
+        <h4>ID: {{ currentUser.id }}</h4>
       </div>
       <div>
-        <h2>Username: {{ currentUser.name }}</h2>
+        <label for="name">Name: </label>
+        <input type="text" name="name" pInputText [(ngModel)]="currentUser.name" />
       </div>
       <div>
-        <h2>Email: {{ currentUser.email }}</h2>
+          <label for="name">Email: </label>
+          <input type="text" name="name" pInputText [(ngModel)]="currentUser.email" />
       </div>
       <p-footer>
         <button pButton type="button" label="Save" icon="pi pi-check" style="margin-right: .25em"></button>
@@ -37,16 +39,24 @@
           <img src="Card" src="/assets/pictures/usercard.png">
         </p-header>
         <div>
-          <h2>ID: {{ restaurant.id }}</h2>
+          <h4>ID: {{ restaurant.id }}</h4>
         </div>
         <div>
-          <h2>Name: {{ restaurant.title }}</h2>
+            <label for="title">Name: </label>
+            <input type="text" name="title" pInputText [(ngModel)]="restaurant.title"
+              (ngModelChange)="checkForm(restaurant.id)" />
         </div>
         <div>
-          <h2>Opinion: {{ restaurant.opinion }}</h2>
+            <label for="opinion">Opinion: </label>
+            <input type="text" name="opinion" pInputText [(ngModel)]="restaurant.opinion" 
+              (ngModelChange)="checkForm(restaurant.id)"  />
         </div>
         <p-footer>
-          <button pButton type="button" label="Save" icon="pi pi-check" style="margin-right: .25em"></button>
+          <!-- [disabled]="isDisabledArr.length && isDisabledArr[restaurant.id]" -->
+          <button pButton type="button" label="Save" icon="pi pi-check" 
+            (click)="submitForm(restaurant)"
+            style="margin-right: .25em">
+         </button>
           <button pButton type="button" label="Cancel" icon="pi pi-times" class="ui-button-secondary"></button>
         </p-footer>
       </p-card>
