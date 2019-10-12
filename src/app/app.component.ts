@@ -15,13 +15,12 @@ import * as _ from 'lodash';
   animations: [ fadeInOut ]
 })
 export class AppComponent implements OnInit, OnChanges, OnDestroy {
-  title = 'restaurantFrontEnd';
+  title = 'Restaurants Review App';
   showAdditionalInfo: boolean;
-  message: any;
   currentUser: User;
   initialRestaurantsArr: Restaurant[] = [];
   restaurantsArr:        Restaurant[] = [];
-  isDisabledArr: number[] = [];
+  isDisabledArr:         number[] = [];
 
   constructor(private userService: UsersService,
               private messageService: MessageService,
