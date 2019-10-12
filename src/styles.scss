@@ -1,1 +1,60 @@
-/* You can add global styles to this file, and also import other style files */
+$column-width: 8.33%;
+
+body {
+    background-color: #292929;
+    color: #D8D8D8;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+.row {
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.col-md-1 {
+    width: $column-width;
+}
+
+.col-md-2 {
+    width: $column-width * 2;
+}
+
+.col-md-3 {
+    width: $column-width * 3;
+}
+
+.col-md-4 {
+    width: $column-width * 4;
+}
+
+.col-md-5 {
+    width: $column-width * 5;
+}
+
+.col-md-6 {
+    width: $column-width * 6;
+}
+
+.col-md-7 {
+    width: $column-width * 7;
+}
+
+.col-md-8 {
+    width: $column-width * 8;
+}
+
+.col-md-9 {
+    width: $column-width * 9;
+}
+
+.col-md-10 {
+    width: $column-width * 10;
+}
+
+.col-md-11 {
+    width: $column-width * 11;
+}
+

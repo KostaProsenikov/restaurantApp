@@ -1,6 +1,5 @@
 import { Component, OnInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { UsersService } from './services/users.service';
-
 import {MessageService} from 'primeng/api';
 import { User } from './models/user.model';
 import { RestaurantsService } from './services/restaurants.service';
@@ -42,12 +41,18 @@ export class AppComponent implements OnInit, OnChanges, OnDestroy {
 
   checkForm(id: number) {
     const restaurant = this.restaurantsArr.filter((rest: Restaurant) => rest.id === id)[0];
-    console.log('restaurant', restaurant);
     if (restaurant.title.length && restaurant.opinion.length) {
-      this.isDisabledArr.push(restaurant.id);
-    } else {
       this.isDisabledArr = this.isDisabledArr.filter((restId: number) => restId !== id);
+    } else {
+      this.isDisabledArr.push(restaurant.id);
     }
+  }
+
+  checkDisabled(id: number): boolean {
+    if (this.isDisabledArr.includes(id)) {
+      return true;
+    }
+    return false;
   }
 
   submitForm(restaurant: Restaurant) {
