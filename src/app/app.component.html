@@ -48,7 +48,7 @@
               (ngModelChange)="checkForm(restaurant.id)"  />
         </div>
         <p-footer>
-          <button pButton type="button" [disabled]="checkDisabled(restaurant.id)" label="Save" icon="pi pi-check" 
+          <button pButton type="button" [disabled]="checkDisabled(restaurant.id) || checkNotTouched(restaurant.id)" label="Save" icon="pi pi-check" 
             (click)="submitForm(restaurant)"
             style="margin-right: .25em">
          </button>

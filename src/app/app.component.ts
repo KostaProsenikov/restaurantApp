@@ -1,10 +1,12 @@
 import { Component, OnInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { UsersService } from './services/users.service';
-import {MessageService} from 'primeng/api';
 import { User } from './models/user.model';
 import { RestaurantsService } from './services/restaurants.service';
 import { Restaurant } from './models/restaurant.model';
 
+// Other Services
+import { MessageService } from 'primeng/api';
+import * as _ from 'lodash';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,7 +17,8 @@ export class AppComponent implements OnInit, OnChanges, OnDestroy {
   showAdditionalInfo: boolean;
   message: any;
   currentUser: User;
-  restaurantsArr: Restaurant[] = [];
+  initialRestaurantsArr: Restaurant[] = [];
+  restaurantsArr:        Restaurant[] = [];
   isDisabledArr: number[] = [];
 
   constructor(private userService: UsersService,
@@ -55,6 +58,21 @@ export class AppComponent implements OnInit, OnChanges, OnDestroy {
     return false;
   }
 
+  checkNotTouched(id: number): boolean {
+    const currentRest = this.restaurantsArr.filter((rest: Restaurant) => rest.id === id)[0];
+    const initialRest = this.initialRestaurantsArr.filter((rest: Restaurant) => rest.id === id)[0];
+    if (currentRest.opinion === initialRest.opinion && currentRest.title === initialRest.title) {
+      return true;
+    }
+    return false;
+  }
+
+  onSuccessGetRestaurants(data: Restaurant[]) {
+    this.initialRestaurantsArr = _.cloneDeep(data);
+    this.restaurantsArr        = data;
+    this.messageService.add({severity: 'success', summary: 'Success', detail: 'Successfully loaded restaurants!' });
+  }
+
   submitForm(restaurant: Restaurant) {
      this.restaurantsServ.updateRestaurant(restaurant, restaurant.id).subscribe(
        (data: any) => this.onSuccessUpdateRestaurant(data),
@@ -76,11 +94,6 @@ export class AppComponent implements OnInit, OnChanges, OnDestroy {
   onSuccessGetUser(data: User) {
     this.currentUser = data;
     this.messageService.add({severity: 'success', summary: 'Success', detail: 'Successfully loaded user!' });
-  }
-
-  onSuccessGetRestaurants(data: Restaurant[]) {
-    this.restaurantsArr = data;
-    this.messageService.add({severity: 'success', summary: 'Success', detail: 'Successfully loaded restaurants!' });
   }
 
   onError(err: any) {
