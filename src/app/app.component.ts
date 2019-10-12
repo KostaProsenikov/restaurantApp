@@ -3,6 +3,7 @@ import { UsersService } from './services/users.service';
 import { User } from './models/user.model';
 import { RestaurantsService } from './services/restaurants.service';
 import { Restaurant } from './models/restaurant.model';
+import { fadeInOut } from './animations/animation/animation.component';
 
 // Other Services
 import { MessageService } from 'primeng/api';
@@ -10,7 +11,8 @@ import * as _ from 'lodash';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [ fadeInOut ]
 })
 export class AppComponent implements OnInit, OnChanges, OnDestroy {
   title = 'restaurantFrontEnd';
@@ -76,8 +78,8 @@ export class AppComponent implements OnInit, OnChanges, OnDestroy {
 
   onSuccessDeleteRestaurant(data, id) {
     if (data && data.message) {
+      this.restaurantsArr = this.restaurantsArr.filter((rest: Restaurant) => rest.id !== id);
       this.messageService.add({severity: 'success', summary: 'Success', detail: `Successfully deleted restaurant with ${id}!` });
-      this.getRestaurantsData();
     }
   }
 

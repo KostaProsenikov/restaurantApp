@@ -8,7 +8,7 @@
 
 <div class="flex">
   <ng-container *ngIf="currentUser && currentUser.name">
-    <p-card header="{{ currentUser.name  }}" subheader="{{ currentUser.email }}" styleClass="ui-card-shadow">
+    <p-card header="{{ currentUser.name  }}" subheader="{{ currentUser.email }}" styleClass="ui-card-shadow" [@fadeInOut]>
       <p-header>
         <h2> Current User: </h2>
         <img src="Card" src="/assets/pictures/usercard.png">
@@ -32,7 +32,7 @@
 
   <ng-container *ngIf="restaurantsArr && restaurantsArr.length">
     <ng-container *ngFor="let restaurant of restaurantsArr">
-      <p-card header="#{{ restaurant.id }} - {{ restaurant.title  }}" styleClass="ui-card-shadow">
+      <p-card header="#{{ restaurant.id }} - {{ restaurant.title  }}" styleClass="ui-card-shadow" [@fadeInOut]>
         <p-header>
           <h2> Restaurant: </h2>
           <img src="Card" src="/assets/pictures/usercard.png">
