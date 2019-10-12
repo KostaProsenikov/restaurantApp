@@ -7,7 +7,7 @@
 <app-header></app-header>
 
 <div class="flex">
-  <div *ngIf="currentUser && currentUser.name" class="grid">
+  <ng-container *ngIf="currentUser && currentUser.name">
     <p-card header="{{ currentUser.name  }}" subheader="{{ currentUser.email }}" styleClass="ui-card-shadow">
       <p-header>
         <h2> Current User: </h2>
@@ -28,9 +28,9 @@
         <button pButton type="button" label="Save" icon="pi pi-check" style="margin-right: .25em"></button>
       </p-footer>
     </p-card>
-  </div>
+  </ng-container>
 
-  <div class="grid" *ngIf="restaurantsArr && restaurantsArr.length">
+  <ng-container *ngIf="restaurantsArr && restaurantsArr.length">
     <ng-container *ngFor="let restaurant of restaurantsArr">
       <p-card header="#{{ restaurant.id }} - {{ restaurant.title  }}" styleClass="ui-card-shadow">
         <p-header>
@@ -49,14 +49,15 @@
         </div>
         <p-footer>
           <button pButton type="button" [disabled]="checkDisabled(restaurant.id) || checkNotTouched(restaurant.id)" label="Save" icon="pi pi-check" 
-            (click)="submitForm(restaurant)"
-            style="margin-right: .25em">
+            (click)="submitForm(restaurant)" style="margin-right: .25em">
          </button>
+
+         <button pButton type="button" label="Delete" class="ui-button-danger" (click)="deleteRestaurant(restaurant.id)" style="margin-right: .25em">
+          </button>
         </p-footer>
       </p-card>
     </ng-container>
-
-  </div>
+  </ng-container>
 </div>
 
 

@@ -67,6 +67,20 @@ export class AppComponent implements OnInit, OnChanges, OnDestroy {
     return false;
   }
 
+  deleteRestaurant(id: number) {
+    this.restaurantsServ.deleteRestaurant(id).subscribe(
+      (data) => this.onSuccessDeleteRestaurant(data, id),
+      (err) => this.onError(err)
+    );
+  }
+
+  onSuccessDeleteRestaurant(data, id) {
+    if (data && data.message) {
+      this.messageService.add({severity: 'success', summary: 'Success', detail: `Successfully deleted restaurant with ${id}!` });
+      this.getRestaurantsData();
+    }
+  }
+
   onSuccessGetRestaurants(data: Restaurant[]) {
     this.initialRestaurantsArr = _.cloneDeep(data);
     this.restaurantsArr        = data;

@@ -1,12 +1,18 @@
 $white-color: #D8D8D8;
 
 .grid {
-    max-width: 50%;
-    display: flex;
+    max-width: 13%;
+    display: inline-flex;
 }
 
 .flex {
-    display: flex;
+    width: 100%;
+}
+
+p-card {
+    width: 13%;
+    display: inline-flex;
+    margin-bottom: 15px;
 }
 
 p-card ::ng-deep {
@@ -21,6 +27,11 @@ p-card ::ng-deep {
 
     .ui-card-header {
         padding: 5px 17px;
+    }
+
+    .ui-card-body {
+        display: inline;
+        max-width: 8%;
     }
 
     .ui-card-shadow {

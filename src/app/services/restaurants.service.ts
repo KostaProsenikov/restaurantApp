@@ -34,7 +34,18 @@ export class RestaurantsService {
 
     const requestOptions = new HttpHeaders(headerDict);
 
-    return this.http.post(this.mainUrl + `restaurants/${id}/update`, restaurant, { headers: requestOptions});
+    return this.http.post(this.mainUrl + `restaurants/${id}`, restaurant, { headers: requestOptions});
+  }
+
+  deleteRestaurant(id: number) {
+    const headerDict = {
+      'Content-Type': 'application/json',
+      Authorization: this.apiToken,
+    };
+
+    const requestOptions = new HttpHeaders(headerDict);
+
+    return this.http.delete(this.mainUrl + `restaurants/${id}`, { headers: requestOptions});
   }
 
 }
