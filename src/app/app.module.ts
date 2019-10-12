@@ -19,6 +19,7 @@ import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
 import { MessageService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
+import { RestaurantsService } from './services/restaurants.service';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { CardModule } from 'primeng/card';
   ],
   providers: [
     UsersService,
+    RestaurantsService,
     MessageService
   ],
   bootstrap: [AppComponent]

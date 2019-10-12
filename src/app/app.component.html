@@ -6,36 +6,66 @@
 
 <app-header></app-header>
 
-<div *ngIf="currentUser && currentUser.name">
-      <p-card header="{{ currentUser.name  }}" subheader="{{ currentUser.email }}" [style]="{width: '50%'}" styleClass="ui-card-shadow">
-    <p-header>
+<div class="flex">
+  <div *ngIf="currentUser && currentUser.name" class="grid">
+    <p-card header="{{ currentUser.name  }}" subheader="{{ currentUser.email }}" styleClass="ui-card-shadow">
+      <p-header>
+        <h2> Current User: </h2>
         <img src="Card" src="/assets/pictures/usercard.png">
-    </p-header>
-    <div>
+      </p-header>
+      <div>
         <h2>ID: {{ currentUser.id }}</h2>
-    </div>
-    <div>
-      <h2>Username: {{ currentUser.name }}</h2>
-    </div>
-    <div>
-      <h2>Email: {{ currentUser.email }}</h2>
-    </div>
-    <p-footer>
+      </div>
+      <div>
+        <h2>Username: {{ currentUser.name }}</h2>
+      </div>
+      <div>
+        <h2>Email: {{ currentUser.email }}</h2>
+      </div>
+      <p-footer>
         <button pButton type="button" label="Save" icon="pi pi-check" style="margin-right: .25em"></button>
         <button pButton type="button" label="Cancel" icon="pi pi-times" class="ui-button-secondary"></button>
-    </p-footer>
-  </p-card>
+      </p-footer>
+    </p-card>
+  </div>
+
+  <div class="grid" *ngIf="restaurantsArr && restaurantsArr.length">
+    <ng-container *ngFor="let restaurant of restaurantsArr">
+      <p-card header="{{ restaurant.title  }}" styleClass="ui-card-shadow">
+        <p-header>
+          <h2> Restaurant: </h2>
+          <img src="Card" src="/assets/pictures/usercard.png">
+        </p-header>
+        <div>
+          <h2>ID: {{ restaurant.id }}</h2>
+        </div>
+        <div>
+          <h2>Name: {{ restaurant.title }}</h2>
+        </div>
+        <div>
+          <h2>Opinion: {{ restaurant.opinion }}</h2>
+        </div>
+        <p-footer>
+          <button pButton type="button" label="Save" icon="pi pi-check" style="margin-right: .25em"></button>
+          <button pButton type="button" label="Cancel" icon="pi pi-times" class="ui-button-secondary"></button>
+        </p-footer>
+      </p-card>
+    </ng-container>
+
+  </div>
 </div>
+
 
 <div *ngIf="showAdditionalInfo">
   <h2>User Info</h2>
 
-  <p-card header="{{ currentUser.name  }}" subheader="{{ currentUser.email }}" [style]="{width: '50%'}" styleClass="ui-card-shadow">
+  <p-card header="{{ currentUser.name  }}" subheader="{{ currentUser.email }}" [style]="{width: '50%'}"
+    styleClass="ui-card-shadow">
     <p-header>
-        <img src="Card" src="/assets/pictures/usercard.png">
+      <img src="Card" src="/assets/pictures/usercard.png">
     </p-header>
     <div>
-        <h2>ID: {{ currentUser.id }}</h2>
+      <h2>ID: {{ currentUser.id }}</h2>
     </div>
     <div>
       <h2>Username: {{ currentUser.name }}</h2>
@@ -44,8 +74,8 @@
       <h2>Email: {{ currentUser.email }}</h2>
     </div>
     <p-footer>
-        <button pButton type="button" label="Save" icon="pi pi-check" style="margin-right: .25em"></button>
-        <button pButton type="button" label="Cancel" icon="pi pi-times" class="ui-button-secondary"></button>
+      <button pButton type="button" label="Save" icon="pi pi-check" style="margin-right: .25em"></button>
+      <button pButton type="button" label="Cancel" icon="pi pi-times" class="ui-button-secondary"></button>
     </p-footer>
   </p-card>
 </div>

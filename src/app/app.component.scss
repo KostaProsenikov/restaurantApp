@@ -1,0 +1,26 @@
+.grid {
+    max-width: 50%;
+    display: flex;
+}
+
+.flex {
+    display: flex;
+}
+
+p-card ::ng-deep {
+    .ui-card {
+        height: 507px !important;
+        width: 360px !important;
+    }
+
+    .ui-card-shadow {
+        position: relative;
+        margin-right: 30px;
+    }
+
+    .ui-card-footer {
+        position: absolute;
+        right: 9px;
+        bottom: 15px;
+    }
+}
