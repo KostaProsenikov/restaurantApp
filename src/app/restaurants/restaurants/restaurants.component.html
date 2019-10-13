@@ -10,11 +10,11 @@
         </div>
         <div class="row">
           <label for="name"  class="col-md-3">Name: </label>
-          <input type="text" class="col-md-9" name="name" pInputText [(ngModel)]="currentUser.name" />
+          <input type="text" class="col-md-8" name="name" pInputText [(ngModel)]="currentUser.name" />
         </div>
         <div class="row">
             <label for="name"  class="col-md-3">Email: </label>
-            <input type="text" class="col-md-9" name="name" pInputText [(ngModel)]="currentUser.email" />
+            <input type="text" class="col-md-8" name="name" pInputText [(ngModel)]="currentUser.email" />
         </div>
         <p-footer>
           <button pButton type="button" label="Save" icon="pi pi-check" style="margin-right: .25em"></button>
@@ -24,26 +24,26 @@
   
     <ng-container *ngIf="restaurantsArr && restaurantsArr.length">
       <ng-container *ngFor="let restaurant of restaurantsArr">
-        <p-card header="#{{ restaurant.id }} - {{ restaurant.title  }}" styleClass="ui-card-shadow" [@fadeInOut]>
+        <p-card header="#{{ restaurant.id }} - {{ restaurant.title | truncate }}" styleClass="ui-card-shadow" [@fadeInOut]>
           <p-header>
-            <h2> Restaurant: </h2>
+            <h2>Restaurant: </h2>
             <img src="Card" src="/assets/pictures/usercard.png">
           </p-header>
           <div class="row">
               <label for="title" class="col-md-3"> Name: </label>
-              <input type="text" class="col-md-6" name="title"    pInputText [(ngModel)]="restaurant.title"
+              <input type="text" class="col-md-8" name="title" pInputText [(ngModel)]="restaurant.title"
                 (ngModelChange)="checkForm(restaurant.id)" />
           </div>
           <div class="row">
               <label for="opinion" class="col-md-3">Opinion: </label>
-              <input type="text"   class="col-md-6" name="opinion" pInputText [(ngModel)]="restaurant.opinion" 
-                (ngModelChange)="checkForm(restaurant.id)"  />
+              <textarea name="opinion" class="col-md-8" pInputTextarea 
+                [(ngModel)]="restaurant.opinion"  (ngModelChange)="checkForm(restaurant.id)">
+              </textarea>
           </div>
           <p-footer>
             <button pButton type="button" [disabled]="checkDisabled(restaurant.id) || checkNotTouched(restaurant.id)" label="Save" icon="pi pi-check" 
               (click)="submitForm(restaurant)" style="margin-right: .25em">
            </button>
-  
            <button pButton type="button" label="Delete" class="ui-button-danger" (click)="deleteRestaurant(restaurant.id)" style="margin-right: .25em">
             </button>
           </p-footer>

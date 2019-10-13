@@ -1,8 +1,18 @@
 .header {
     margin-bottom: 20px;
 }
+
 .py-2 {
     padding-right: 15px;
     color: currentColor;
     font-size: 1.5rem;
+}
+
+.container {
+    align-items: flex-start !important;
+    justify-content: unset !important;
+
+    a {
+        margin-right: 30px;
+    }
 }

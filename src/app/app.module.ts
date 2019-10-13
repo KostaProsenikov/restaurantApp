@@ -1,11 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
-//  Internal Components
-import { HeaderComponent } from './navigation/header/header.component';
 
 // Angular Modules
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,14 +16,19 @@ import { MessageService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { RestaurantsService } from './services/restaurants.service';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 // Font Awesome
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+//  Internal Components
+import { AppComponent } from './app.component';
+import { HeaderComponent } from './navigation/header/header.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { RestaurantsComponent } from './restaurants/restaurants/restaurants.component';
 import { ReviewsComponent } from './restaurants/reviews/reviews.component';
-
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,8 @@ import { ReviewsComponent } from './restaurants/reviews/reviews.component';
     LoginComponent,
     RegisterComponent,
     RestaurantsComponent,
-    ReviewsComponent
+    ReviewsComponent,
+    TruncatePipe
   ],
   imports: [
     BrowserModule,
@@ -50,7 +51,8 @@ import { ReviewsComponent } from './restaurants/reviews/reviews.component';
     ToastModule,
     CardModule,
     InputTextModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    InputTextareaModule
   ],
   providers: [
     UsersService,
