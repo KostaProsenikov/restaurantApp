@@ -1,9 +1,3 @@
-<p-toast position="top-right"></p-toast>
-
-<h2>Welcome to our {{ title }}</h2>
-
-<button pButton type="button" label="Test Button" class="ui-button-success" (click)="showSomething()"></button>
-
 <app-header></app-header>
 
 <div class="flex">
@@ -58,28 +52,4 @@
       </p-card>
     </ng-container>
   </ng-container>
-</div>
-
-
-<div *ngIf="showAdditionalInfo">
-  <h2>User Info</h2>
-
-  <p-card header="{{ currentUser.name  }}" subheader="{{ currentUser.email }}" [style]="{width: '50%'}"
-    styleClass="ui-card-shadow">
-    <p-header>
-      <img src="Card" src="/assets/pictures/usercard.png">
-    </p-header>
-    <div>
-      <h2>ID: {{ currentUser.id }}</h2>
-    </div>
-    <div>
-      <h2>Username: {{ currentUser.name }}</h2>
-    </div>
-    <div>
-      <h2>Email: {{ currentUser.email }}</h2>
-    </div>
-    <p-footer>
-      <button pButton type="button" label="Save" icon="pi pi-check" style="margin-right: .25em"></button>
-    </p-footer>
-  </p-card>
 </div>
