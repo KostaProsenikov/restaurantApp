@@ -24,12 +24,20 @@ import { InputTextModule } from 'primeng/inputtext';
 
 // Font Awesome
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { RestaurantsComponent } from './restaurants/restaurants/restaurants.component';
+import { ReviewsComponent } from './restaurants/reviews/reviews.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginComponent,
+    RegisterComponent,
+    RestaurantsComponent,
+    ReviewsComponent
   ],
   imports: [
     BrowserModule,

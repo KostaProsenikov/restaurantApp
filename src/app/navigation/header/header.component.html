@@ -1,11 +1,29 @@
 <p-toast position="top-right"></p-toast>
 <nav class="navbar navbar-dark bg-dark shadow-sm">
     <div class="d-flex justify-content-between">
-      <a class="py-2 d-none d-md-inline-block"> <fa-icon [icon]="faHome"></fa-icon>         Home</a>
-      <a class="py-2 d-none d-md-inline-block"> <fa-icon [icon]="faSignInAlt"></fa-icon>    Login</a>
-      <a class="py-2 d-none d-md-inline-block"> <fa-icon [icon]="faBriefcase"></fa-icon>    Register</a>
-      <a class="py-2 d-none d-md-inline-block"> <fa-icon [icon]="faSignOutAlt"></fa-icon>   Logout</a>
-      <a class="py-2 d-none d-md-inline-block"> <fa-icon [icon]="faUtensils"></fa-icon>     Restaurants</a>
-      <a class="py-2 d-none d-md-inline-block"> <fa-icon [icon]="faSearchDollar"></fa-icon> Reviews</a>
+        <a class="py-2 d-none d-md-inline-block" routerLink="/" routerLinkActive="active">
+            <fa-icon [icon]="faHome"></fa-icon>
+            <span class="span-title">Home</span>
+        </a>
+        <a class="py-2 d-none d-md-inline-block" routerLink="/login" routerLinkActive="active">
+            <fa-icon [icon]="faSignInAlt"></fa-icon>
+            <span class="span-title">Login</span>
+        </a>
+        <a class="py-2 d-none d-md-inline-block" routerLink="/register" routerLinkActive="active">
+            <fa-icon [icon]="faBriefcase"></fa-icon>
+            <span class="span-title">Register</span>
+        </a>
+        <a class="py-2 d-none d-md-inline-block" routerLink="/logout" routerLinkActive="active">
+            <fa-icon [icon]="faSignOutAlt"></fa-icon>
+            <span class="span-title">Logout</span>
+        </a>
+        <a class="py-2 d-none d-md-inline-block" routerLink="/restaurants" routerLinkActive="active">
+            <fa-icon [icon]="faUtensils"></fa-icon>
+            <span class="span-title">Restaurants</span>
+        </a>
+        <a class="py-2 d-none d-md-inline-block" routerLink="/reviews" routerLinkActive="active">
+            <fa-icon [icon]="faSearchDollar"></fa-icon>
+            <span class="span-title">Reviews</span>
+        </a>
     </div>
 </nav>

@@ -1,0 +1,59 @@
+$white-color: #D8D8D8;
+
+.grid {
+    max-width: 13%;
+    display: inline-flex;
+}
+
+.flex {
+    width: 100%;
+    margin-top: 35px;
+}
+
+p-card {
+    width: 13%;
+    display: inline-flex;
+    margin-bottom: 15px;
+}
+
+p-card ::ng-deep {
+    .ui-card {
+        height: 507px !important;
+        width: 360px !important;
+    }
+
+    .ui-card-title, .ui-card-subtitle {
+        color: $white-color;
+    }
+
+    .ui-card-header {
+        padding: 5px 17px;
+    }
+
+    .ui-card-body {
+        display: inline;
+        max-width: 8%;
+    }
+
+    .ui-card-shadow {
+        position: relative;
+        margin-right: 30px;
+        background-color: currentColor;
+    }
+
+    .ui-card-footer {
+        position: absolute;
+        right: 9px;
+        bottom: 15px;
+    }
+
+    label {
+        display: grid;
+        align-items: center;
+        align-content: center;
+    }
+
+    label, h4, h3, h2 {
+        color: $white-color;
+    }
+}

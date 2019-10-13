@@ -6,6 +6,14 @@ body {
     padding: 20px;
 }
 
+a {
+    text-decoration: none !important;
+
+    &:hover {
+        color: #70a4d2 !important;
+    }
+}
+
 button:disabled {
     cursor: not-allowed;
 }
