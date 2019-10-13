@@ -29,6 +29,7 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { RestaurantsInfoComponent } from './components/restaurants/restaurants-info/restaurants-info.component';
 import { ReviewsComponent } from './components/restaurants/reviews/reviews.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { TruncatePipe } from './pipes/truncate.pipe';
   providers: [
     UsersService,
     RestaurantsService,
-    MessageService
+    MessageService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
