@@ -23,11 +23,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 //  Internal Components
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './navigation/header/header.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { RestaurantsComponent } from './restaurants/restaurants/restaurants.component';
-import { ReviewsComponent } from './restaurants/reviews/reviews.component';
+import { HeaderComponent } from './components/navigation/header/header.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
+import { RestaurantsInfoComponent } from './components/restaurants/restaurants-info/restaurants-info.component';
+import { ReviewsComponent } from './components/restaurants/reviews/reviews.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
 
 @NgModule({
@@ -36,7 +36,7 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     HeaderComponent,
     LoginComponent,
     RegisterComponent,
-    RestaurantsComponent,
+    RestaurantsInfoComponent,
     ReviewsComponent,
     TruncatePipe
   ],

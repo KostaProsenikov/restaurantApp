@@ -75,7 +75,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "restaurantFrontEnd:build"
+            "browserTarget": "restaurantFrontEnd:build",
+            "port": 4200
           },
           "configurations": {
             "production": {

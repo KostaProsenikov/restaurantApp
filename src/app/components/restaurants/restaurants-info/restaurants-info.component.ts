@@ -4,17 +4,17 @@ import { Restaurant } from 'src/app/models/restaurant.model';
 import { UsersService } from 'src/app/services/users.service';
 import { MessageService } from 'primeng/api';
 import { RestaurantsService } from 'src/app/services/restaurants.service';
-import { fadeInOut } from '../.././animations/animation/animation.component';
+import { fadeInOut } from '../../../animations/animation/animation.component';
 
 import * as _ from 'lodash';
 
 @Component({
-  selector: 'app-restaurants',
-  templateUrl: './restaurants.component.html',
-  styleUrls: ['./restaurants.component.scss'],
+  selector: 'app-rest-info',
+  templateUrl: './restaurants-info.component.html',
+  styleUrls: ['./restaurants-info.component.scss'],
   animations: [ fadeInOut ]
 })
-export class RestaurantsComponent implements OnInit, OnChanges, OnDestroy {
+export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
   title = 'Restaurants Review App';
   showAdditionalInfo: boolean;
   currentUser: User;
