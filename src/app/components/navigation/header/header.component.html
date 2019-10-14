@@ -1,32 +1,32 @@
 <p-toast position="top-right"></p-toast>
 <nav class="navbar navbar-dark bg-dark shadow-sm">
     <div class="container">
-        <a class="py-2 d-none d-md-inline-block" routerLink="/" [routerLinkActiveOptions]="{exact:true}"
+        <a class="py-2 d-none d-md-inline-block" *ngIf="isAuthenticated()" routerLink="/" [routerLinkActiveOptions]="{exact:true}"
            routerLinkActive="active">
             <fa-icon [icon]="faHome"></fa-icon>
             <span class="span-title">Home</span>
         </a>
-        <a class="py-2 d-none d-md-inline-block" *ngIf="!user" routerLink="/login" routerLinkActive="active">
+        <a class="py-2 d-none d-md-inline-block" *ngIf="!isAuthenticated()" routerLink="/login" routerLinkActive="active">
             <fa-icon [icon]="faSignInAlt"></fa-icon>
             <span class="span-title">Login</span>
         </a>
-        <a class="py-2 d-none d-md-inline-block" *ngIf="!user" routerLink="/register" routerLinkActive="active">
+        <a class="py-2 d-none d-md-inline-block" *ngIf="!isAuthenticated()" routerLink="/register" routerLinkActive="active">
             <fa-icon [icon]="faBriefcase"></fa-icon>
             <span class="span-title">Register</span>
         </a>
-        <a class="py-2 d-none d-md-inline-block" routerLink="/restaurants" *ngIf="user && user.email" routerLinkActive="active">
+        <a class="py-2 d-none d-md-inline-block" routerLink="/restaurants" *ngIf="isAuthenticated()" routerLinkActive="active">
             <fa-icon [icon]="faUtensils"></fa-icon>
             <span class="span-title">Restaurants</span>
         </a>
-        <a class="py-2 d-none d-md-inline-block" routerLink="/reviews" *ngIf="user && user.email" routerLinkActive="active">
+        <a class="py-2 d-none d-md-inline-block" routerLink="/reviews" *ngIf="isAuthenticated()" routerLinkActive="active">
             <fa-icon [icon]="faSearchDollar"></fa-icon>
             <span class="span-title">Reviews</span>
         </a>
-        <a class="py-2 d-none d-md-inline-block username" *ngIf="user && user.name">
+        <a class="py-2 d-none d-md-inline-block username" *ngIf="isAuthenticated()">
             <fa-icon [icon]="faUserTie"></fa-icon>
             <span class="span-user">Username: {{ user.email }} </span>
         </a>
-        <a class="py-2 d-none d-md-inline-block float-right" *ngIf="user && user.email" routerLink="/logout" routerLinkActive="active">
+        <a class="py-2 d-none d-md-inline-block float-right" *ngIf="isAuthenticated()" (click)="logout()">
             <fa-icon [icon]="faSignOutAlt"></fa-icon>
             <span class="span-title">Logout</span>
         </a>

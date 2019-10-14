@@ -4,6 +4,7 @@
 
 .py-2 {
     padding-right: 15px;
+    cursor: pointer;
     color: currentColor;
     .span-title, fa-icon {
         font-size: 1.5rem;
@@ -15,7 +16,7 @@
 }
 
 .username {
-    cursor: default;
+    cursor: default !important;
 }
 
 

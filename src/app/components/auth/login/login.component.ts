@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   password = '';
   rememberMe = false;
 
+
   constructor(private messageService: MessageService,
               private authService: AuthService,
               private userService: UsersService,
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
   }
 
   validateForm() {
-    if (this.username.length < 3 || this.password.length < 5) {
+    if ((this.username && this.username.length < 3) || (this.password.length && this.password.length < 5)) {
       return false;
     }
     return true;
@@ -61,6 +62,7 @@ export class LoginComponent implements OnInit {
 
   onSuccessGetUser(user: User) {
     localStorage.setItem('user', JSON.stringify(user));
+    this.userService.refreshNavigationMenu.next(true);
     this.router.navigateByUrl('/');
     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Successfully logged in!' });
   }
