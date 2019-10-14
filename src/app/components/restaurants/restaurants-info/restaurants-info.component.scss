@@ -10,6 +10,34 @@ $white-color: #D8D8D8;
     margin-top: 35px;
 }
 
+.information h3 {
+    font-size: 1.2rem;
+}
+
+.items label {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+p-dropdown ::ng-deep {
+    label {
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+}
+
+p-progressSpinner ::ng-deep {
+    position: absolute;
+    left: 36%;
+    top: 30%;
+
+    .ui-progress-spinner {
+        height: 300px !important;
+        width: 300px !important;
+    }
+}
+
 p-card {
     width: 13%;
     display: inline-flex;

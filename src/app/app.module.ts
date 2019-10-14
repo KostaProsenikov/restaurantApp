@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { UsersService } from './services/users.service';
-import { FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 // PrimeNG modules
 import {ButtonModule} from 'primeng/button';
@@ -17,6 +17,8 @@ import { CardModule } from 'primeng/card';
 import { RestaurantsService } from './services/restaurants.service';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { DropdownModule } from 'primeng/dropdown';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 // Font Awesome
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -53,7 +55,10 @@ import { AuthService } from './services/auth.service';
     CardModule,
     InputTextModule,
     FontAwesomeModule,
-    InputTextareaModule
+    InputTextareaModule,
+    DropdownModule,
+    ReactiveFormsModule,
+    ProgressSpinnerModule
   ],
   providers: [
     UsersService,

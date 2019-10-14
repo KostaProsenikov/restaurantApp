@@ -17,7 +17,12 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
   showAdditionalInfo: boolean;
   initialRestaurantsArr: Restaurant[] = [];
   restaurantsArr:        Restaurant[] = [];
-  isDisabledArr:         number[] = [];
+  isDisabledArr:         number[]     = [];
+  itemsPerPageDropdown:  any[]        = [];
+  currentPage                         = 1;
+  totalItems                          = 0;
+  selectedPerPage: any;
+  loading = false;
 
   constructor(private messageService:  MessageService,
               private restaurantsServ: RestaurantsService) { }
@@ -25,12 +30,29 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit() {
     this.showAdditionalInfo = false;
     this.getRestaurantsData();
+    this.fillDropdownArray();
   }
 
   showSomething() {
     this.showAdditionalInfo = !this.showAdditionalInfo;
   }
 
+  updateResults(event) {
+    const limit = Number(event.value.id);
+    this.loading = true;
+    this.restaurantsServ.getAllRestaurants(1, limit).subscribe(
+      (data: any) => this.onSuccessGetRestaurants(data),
+      (err)       => this.onError(err)
+    );
+  }
+
+  fillDropdownArray() {
+    this.itemsPerPageDropdown = [
+      {label: '20', value:  {id: 20}},
+      {label: '50', value:  {id: 50}},
+      {label: '100', value: {id: 100}},
+    ];
+  }
 
 
   checkForm(id: number) {
@@ -72,9 +94,12 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  onSuccessGetRestaurants(data: Restaurant[]) {
-    this.initialRestaurantsArr = _.cloneDeep(data);
-    this.restaurantsArr        = data;
+  onSuccessGetRestaurants(restData: any) {
+    this.initialRestaurantsArr = _.cloneDeep(restData.data);
+    this.restaurantsArr        = restData.data;
+    this.totalItems  = restData.total;
+    this.currentPage = restData.current_page;
+    this.loading = false;
     this.messageService.add({severity: 'success', summary: 'Success', detail: 'Successfully loaded restaurants!' });
   }
 
@@ -86,7 +111,8 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getRestaurantsData() {
-    this.restaurantsServ.getAllRestaurants().subscribe(
+    this.loading = true;
+    this.restaurantsServ.getAllRestaurants(1, 20).subscribe(
       (data: any) => this.onSuccessGetRestaurants(data),
       (err)       => this.onError(err)
     );

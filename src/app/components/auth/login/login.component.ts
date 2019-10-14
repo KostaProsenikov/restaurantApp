@@ -62,8 +62,8 @@ export class LoginComponent implements OnInit {
 
   onSuccessGetUser(user: User) {
     localStorage.setItem('user', JSON.stringify(user));
-    this.userService.refreshNavigationMenu.next(true);
     this.router.navigateByUrl('/');
+    this.userService.refreshNavigationMenu.next(true);
     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Successfully logged in!' });
   }
 
