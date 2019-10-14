@@ -1,7 +1,5 @@
 import { Component, OnInit, SimpleChanges, OnChanges, OnDestroy } from '@angular/core';
-import { User } from 'src/app/models/user.model';
 import { Restaurant } from 'src/app/models/restaurant.model';
-import { UsersService } from 'src/app/services/users.service';
 import { MessageService } from 'primeng/api';
 import { RestaurantsService } from 'src/app/services/restaurants.service';
 import { fadeInOut } from '../../../animations/animation/animation.component';
@@ -17,18 +15,15 @@ import * as _ from 'lodash';
 export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
   title = 'Restaurants Review App';
   showAdditionalInfo: boolean;
-  currentUser: User;
   initialRestaurantsArr: Restaurant[] = [];
   restaurantsArr:        Restaurant[] = [];
   isDisabledArr:         number[] = [];
 
-  constructor(private userService:     UsersService,
-              private messageService:  MessageService,
+  constructor(private messageService:  MessageService,
               private restaurantsServ: RestaurantsService) { }
 
   ngOnInit() {
     this.showAdditionalInfo = false;
-    this.getUserData();
     this.getRestaurantsData();
   }
 
@@ -36,12 +31,7 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
     this.showAdditionalInfo = !this.showAdditionalInfo;
   }
 
-  getUserData() {
-    this.userService.getCurrentUser().subscribe(
-      (data: any) => this.onSuccessGetUser(data),
-      (err)       => this.onError(err)
-    );
-  }
+
 
   checkForm(id: number) {
     const restaurant = this.restaurantsArr.filter((rest: Restaurant) => rest.id === id)[0];
@@ -104,11 +94,6 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
 
   onSuccessUpdateRestaurant(restaurant: Restaurant) {
     this.messageService.add({severity: 'success', summary: 'Success', detail: `Successfully updated ${restaurant.title}!` });
-  }
-
-  onSuccessGetUser(data: User) {
-    this.currentUser = data;
-    this.messageService.add({severity: 'success', summary: 'Success', detail: 'Successfully loaded user!' });
   }
 
   onError(err: any) {

@@ -1,27 +1,4 @@
 <div class="flex">
-    <ng-container *ngIf="currentUser && currentUser.name">
-      <p-card header="{{ currentUser.name  }}" subheader="{{ currentUser.email }}" styleClass="ui-card-shadow" [@fadeInOut]>
-        <p-header>
-          <h2> Current User: </h2>
-          <img src="Card" src="/assets/pictures/usercard.png">
-        </p-header>
-        <div>
-          <h4>ID: {{ currentUser.id }}</h4>
-        </div>
-        <div class="row">
-          <label for="name"  class="col-md-3">Name: </label>
-          <input type="text" class="col-md-8" name="name" pInputText [(ngModel)]="currentUser.name" />
-        </div>
-        <div class="row">
-            <label for="name"  class="col-md-3">Email: </label>
-            <input type="text" class="col-md-8" name="name" pInputText [(ngModel)]="currentUser.email" />
-        </div>
-        <p-footer>
-          <button pButton type="button" label="Save" icon="pi pi-check" style="margin-right: .25em"></button>
-        </p-footer>
-      </p-card>
-    </ng-container>
-  
     <ng-container *ngIf="restaurantsArr && restaurantsArr.length">
       <ng-container *ngFor="let restaurant of restaurantsArr">
         <p-card header="#{{ restaurant.id }} - {{ restaurant.title | truncate }}" styleClass="ui-card-shadow" [@fadeInOut]>

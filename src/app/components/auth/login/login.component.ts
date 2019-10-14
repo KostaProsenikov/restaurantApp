@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +18,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private messageService: MessageService,
               private authService: AuthService,
+              private userService: UsersService,
               private router: Router) { }
 
   ngOnInit() {
@@ -23,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   validateForm() {
     if (this.username.length < 3 || this.password.length < 5) {
-        return false;
+      return false;
     }
     return true;
   }
@@ -37,21 +40,34 @@ export class LoginComponent implements OnInit {
       };
       this.authService.login(loginObj).subscribe(
         (data) => this.onSuccessGetLoginData(data),
-        (err)  => this.onError(err)
+        (err) => this.onError(err)
       );
     } else {
-      this.messageService.add({severity: 'error', summary: 'Error', detail: 'Please fill in both username and password fields!' });
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please fill in both username and password fields!' });
     }
   }
 
   onSuccessGetLoginData(data: any) {
     localStorage.setItem('token', data.access_token);
-    this.router.navigateByUrl('/');
-    this.messageService.add({severity: 'success', summary: 'Success', detail: 'Successfully logged in!' });
+    this.getUserData();
   }
 
+  getUserData() {
+    this.userService.getCurrentUser().subscribe(
+      (data: any) => this.onSuccessGetUser(data),
+      (err) => this.onError(err)
+    );
+  }
+
+  onSuccessGetUser(user: User) {
+    localStorage.setItem('user', JSON.stringify(user));
+    this.router.navigateByUrl('/');
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Successfully logged in!' });
+  }
+
+
   onError(err: any) {
-    this.messageService.add({severity: 'error', summary: 'Error', detail: 'Login error! Unauthorized!' });
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Login error! Unauthorized!' });
   }
 
 }

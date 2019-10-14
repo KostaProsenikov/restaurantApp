@@ -5,12 +5,25 @@
 .py-2 {
     padding-right: 15px;
     color: currentColor;
-    font-size: 1.5rem;
+    .span-title, fa-icon {
+        font-size: 1.5rem;
+    }
+
+    .span-user {
+        font-size: 1rem;
+    }
 }
 
+.username {
+    cursor: default;
+}
+
+
+
 .container {
-    align-items: flex-start !important;
-    // justify-content: unset !important;
+    display: unset !important; 
+    max-width: 80%;
+    margin-left: 120px;
 
     a {
         margin-right: 30px;
