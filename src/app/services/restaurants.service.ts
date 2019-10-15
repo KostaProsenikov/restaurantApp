@@ -20,15 +20,9 @@ export class RestaurantsService {
 
   getAllRestaurants(page?: number, limit?: number): Observable<any> {
     this.setApiToken();
-    let limitParam = 20;
-    let pageParam = 1;
-    if (limit) {
-      limitParam = limit;
-    }
-    if (page) {
-      pageParam = page;
-    }
-    const queryPar = new HttpParams().set('page', pageParam.toString()).set('perPage', limitParam.toString());
+    const pageParam = page ? page : 1;
+    const limitParam = limit ? limit : 20;
+    const queryPar = new HttpParams().set('page', pageParam.toString()).set('limit', limitParam.toString());
 
     return this.http.get(this.mainUrl + 'restaurants', { headers: this.requestOptions, params: queryPar});
   }
