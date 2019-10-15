@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit, OnChanges {
               private router: Router) { }
 
   ngOnInit() {
-    this.checkIfLoggedIn();
     this.refreshMenuOnChanges();
   }
 

@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   }
 
   validateForm() {
-    if ((this.username && this.username.length < 3) || (this.password.length && this.password.length < 5)) {
+    if ((this.username && this.username.length < 3) || (this.password.length && this.password.length < 4)) {
       return false;
     }
     return true;
