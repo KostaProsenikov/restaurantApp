@@ -106,7 +106,6 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
     this.messageService.add({severity: 'success', summary: 'Success', detail: 'Successfully loaded restaurants!' });
   }
 
-
   paginate(event) {
     const page = Number(event.page + 1);
     this.loading = true;
