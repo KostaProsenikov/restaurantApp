@@ -2,48 +2,53 @@
   <ng-container *ngIf="loading">
     <p-progressSpinner></p-progressSpinner>
   </ng-container>
-    <ng-container *ngIf="!loading && restaurantsArr && restaurantsArr.length">
-      <div class="pagination">
-        <div class="information">
-            <h3 class="total">Page: {{ currentPage }}</h3>
-            <h3 class="total">Total restaurants: {{ totalItems }}</h3>
-        </div>
-
-        <div class="items">
-            <label>Items Per Page: </label>
-            <p-dropdown [(ngModel)]="selectedPerPage" (ngModelChange)="updateResults($event)"
-                       [options]="itemsPerPageDropdown" optionLabel="label" >
-            </p-dropdown>
-        </div>
-
+  <ng-container *ngIf="!loading && restaurantsArr && restaurantsArr.length">
+    <div class="pagination">
+      <div class="information">
+        <h3 class="total">Page: {{ currentPage }}</h3>
+        <h3 class="total">Total restaurants: {{ totalItems }}</h3>
       </div>
-      <p-paginator [rows]="limit" [totalRecords]="totalItems"  (onPageChange)="paginate($event)"></p-paginator>
 
-      <ng-container *ngFor="let restaurant of restaurantsArr">
-        <p-card header="#{{ restaurant.id }} - {{ restaurant.title | truncate }}" styleClass="ui-card-shadow" [@fadeInOut]>
-          <p-header>
-            <h2>Restaurant: </h2>
-            <img src="/assets/pictures/usercard.png">
-          </p-header>
-          <div class="row">
-              <label for="title" class="col-md-3"> Name: </label>
-              <input type="text" id="title" class="col-md-8" name="title" pInputText [(ngModel)]="restaurant.title"
-                (ngModelChange)="checkForm(restaurant.id)" />
-          </div>
-          <div class="row">
-              <label for="opinion" class="col-md-3">Opinion: </label>
-              <textarea name="opinion" id="opinion" class="col-md-8" pInputTextarea
-                [(ngModel)]="restaurant.opinion"  (ngModelChange)="checkForm(restaurant.id)">
-              </textarea>
-          </div>
-          <p-footer>
-            <button pButton type="button" [disabled]="checkDisabled(restaurant.id) || checkNotTouched(restaurant.id)" label="Save" icon="pi pi-check"
-              (click)="submitForm(restaurant)" style="margin-right: .25em">
-           </button>
-           <button pButton type="button" label="Delete" class="ui-button-danger" (click)="deleteRestaurant(restaurant.id)" style="margin-right: .25em">
-            </button>
-          </p-footer>
-        </p-card>
-      </ng-container>
+      <div class="items">
+        <label>Items Per Page: </label>
+        <p-dropdown [(ngModel)]="selectedPerPage" (ngModelChange)="updateLimit($event)"
+                    [options]="itemsPerPageDropdown" optionLabel="label">
+        </p-dropdown>
+      </div>
+
+    </div>
+    <p-paginator [rows]="limit" [totalRecords]="totalItems" (onPageChange)="updatePage($event)"></p-paginator>
+
+    <ng-container *ngFor="let restaurant of restaurantsArr">
+      <p-card header="#{{ restaurant.id }} - {{ restaurant.title | truncate }}" styleClass="ui-card-shadow"
+              [@fadeInOut]>
+        <p-header>
+          <h2>Restaurant: </h2>
+          <img src="/assets/pictures/usercard.png">
+        </p-header>
+        <div class="row">
+          <label for="title" class="col-md-3"> Name: </label>
+          <input type="text" id="title" class="col-md-8" name="title" pInputText
+                 [(ngModel)]="restaurant.title"
+                 (ngModelChange)="checkForm(restaurant.id)"/>
+        </div>
+        <div class="row">
+          <label for="opinion" class="col-md-3">Opinion: </label>
+          <textarea name="opinion" id="opinion" class="col-md-8" pInputTextarea
+                    [(ngModel)]="restaurant.opinion"
+                    (ngModelChange)="checkForm(restaurant.id)">
+          </textarea>
+        </div>
+        <p-footer>
+          <button pButton type="button" [disabled]="checkDisabled(restaurant.id) || checkNotTouched(restaurant.id)"
+                  label="Save" icon="pi pi-check"
+                  (click)="submitForm(restaurant)" style="margin-right: .25em">
+          </button>
+          <button pButton type="button" label="Delete" class="ui-button-danger"
+                  (click)="deleteRestaurant(restaurant.id)" style="margin-right: .25em">
+          </button>
+        </p-footer>
+      </p-card>
     </ng-container>
-  </div>
+  </ng-container>
+</div>

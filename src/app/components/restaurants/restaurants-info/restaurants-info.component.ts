@@ -18,13 +18,13 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
   initialRestaurantsArr: Restaurant[] = [];
   restaurantsArr:        Restaurant[] = [];
   isDisabledArr:         number[]     = [];
-  itemsPerPageDropdown:  any[]        = [];
   currentPage                         = 1;
+  limit                               = 20;
   totalItems                          = 0;
   selectedPerPage: any;
+  itemsPerPageDropdown:  any[]        = [];
   loading = false;
-  lastPage: any;
-  limit: any;
+
 
   constructor(private messageService:  MessageService,
               private restaurantsServ: RestaurantsService) { }
@@ -37,15 +37,6 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
 
   showSomething() {
     this.showAdditionalInfo = !this.showAdditionalInfo;
-  }
-
-  updateResults(event) {
-    const limit = Number(event.value.id);
-    this.loading = true;
-    this.restaurantsServ.getAllRestaurants(1, limit).subscribe(
-      (data: any) => this.onSuccessGetRestaurants(data),
-      (err)       => this.onError(err)
-    );
   }
 
   fillDropdownArray() {
@@ -96,6 +87,32 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  getRestaurantsData() {
+    this.loading = true;
+    this.restaurantsServ.getAllRestaurants(this.currentPage, this.limit).subscribe(
+      (data: any) => this.onSuccessGetRestaurants(data),
+      (err)       => this.onError(err)
+    );
+  }
+
+  updateLimit(event) {
+    const limit = Number(event.value.id);
+    this.loading = true;
+    this.restaurantsServ.getAllRestaurants(this.currentPage, limit).subscribe(
+      (data: any) => this.onSuccessGetRestaurants(data),
+      (err)       => this.onError(err)
+    );
+  }
+
+  updatePage(event) {
+    const page = Number(event.page + 1);
+    this.loading = true;
+    this.restaurantsServ.getAllRestaurants(page, this.limit).subscribe(
+      (data: any) => this.onSuccessGetRestaurants(data),
+      (err)       => this.onError(err)
+    );
+  }
+
   onSuccessGetRestaurants(restData: any) {
     this.initialRestaurantsArr = _.cloneDeep(restData.data);
     this.restaurantsArr        = restData.data;
@@ -106,28 +123,11 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
     this.messageService.add({severity: 'success', summary: 'Success', detail: 'Successfully loaded restaurants!' });
   }
 
-  paginate(event) {
-    const page = Number(event.page + 1);
-    this.loading = true;
-    this.restaurantsServ.getAllRestaurants(page, this.limit).subscribe(
-      (data: any) => this.onSuccessGetRestaurants(data),
-      (err)       => this.onError(err)
-    );
-  }
-
   submitForm(restaurant: Restaurant) {
      this.restaurantsServ.updateRestaurant(restaurant, restaurant.id).subscribe(
        (data: any) => this.onSuccessUpdateRestaurant(data),
        (err: any)  => this.onError(err)
      );
-  }
-
-  getRestaurantsData() {
-    this.loading = true;
-    this.restaurantsServ.getAllRestaurants(1, 20).subscribe(
-      (data: any) => this.onSuccessGetRestaurants(data),
-      (err)       => this.onError(err)
-    );
   }
 
   onSuccessUpdateRestaurant(restaurant: Restaurant) {
