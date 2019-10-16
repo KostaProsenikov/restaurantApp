@@ -23,6 +23,8 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
   totalItems                          = 0;
   selectedPerPage: any;
   loading = false;
+  lastPage: any;
+  limit: any;
 
   constructor(private messageService:  MessageService,
               private restaurantsServ: RestaurantsService) { }
@@ -100,7 +102,18 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
     this.totalItems  = restData.total;
     this.currentPage = restData.current_page;
     this.loading = false;
+    this.limit = restData.per_page;
     this.messageService.add({severity: 'success', summary: 'Success', detail: 'Successfully loaded restaurants!' });
+  }
+
+
+  paginate(event) {
+    const page = Number(event.page + 1);
+    this.loading = true;
+    this.restaurantsServ.getAllRestaurants(page, this.limit).subscribe(
+      (data: any) => this.onSuccessGetRestaurants(data),
+      (err)       => this.onError(err)
+    );
   }
 
   submitForm(restaurant: Restaurant) {
