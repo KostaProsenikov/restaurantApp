@@ -1,18 +1,8 @@
-<<<<<<< HEAD
 import { Component, OnInit, SimpleChanges, OnChanges, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Restaurant } from 'src/app/models/restaurant.model';
 import { MessageService } from 'primeng/api';
 import { RestaurantsService } from 'src/app/services/restaurants.service';
 import { fadeInOut } from '../../../animations/animation/animation.component';
-=======
-/* tslint:disable:no-trailing-whitespace */
-import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
-import {Restaurant} from 'src/app/models/restaurant.model';
-import {MessageService} from 'primeng/api';
-import {RestaurantsService} from 'src/app/services/restaurants.service';
-import {fadeInOut} from '../../../animations/animation/animation.component';
->>>>>>> 3f599c3dda9e56fac44f882d7a9835c285a4d5f6
-
 import * as _ from 'lodash';
 import { Paginator } from 'primeng/paginator';
 
@@ -34,21 +24,8 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
   itemsPerPageDropdown: any[]          = [];
   loading =                           false;
   showAdditionalInfo: boolean;
-<<<<<<< HEAD
-  initialRestaurantsArr: Restaurant[] = [];
-  restaurantsArr:        Restaurant[] = [];
-  isDisabledArr:         number[]     = [];
-  currentPage                         = 1;
-  limit                               = 20;
-  totalItems                          = 0;
-  selectedPerPage: any;
-  itemsPerPageDropdown:  any[]        = [];
-  loading = false;
   @ViewChild('dt', {static: false}) dt: Paginator;
   initialLoadComplete = false;
-=======
-
->>>>>>> 3f599c3dda9e56fac44f882d7a9835c285a4d5f6
 
   constructor(private messageService: MessageService,
               private restaurantsServ: RestaurantsService) {
@@ -116,19 +93,16 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  getRestaurantsData(event?) {
-    console.log(event);
-    if (event !== undefined) {
-      this.currentPage = event.page !== undefined ? Number(event.page + 1) : this.currentPage;
-      this.limit = event.value !== undefined ? Number(event.value.id) : this.limit;
-    }
+  getRestaurantsData() {
+    this.loading = true;
+    this.restaurantsServ.getAllRestaurants(this.currentPage, this.limit).subscribe(
+      (data: any) => this.onSuccessGetRestaurants(data),
+      (err)       => this.onError(err)
+    );
+  }
 
-<<<<<<< HEAD
   updatePage(event) {
-    const page = Number(event.page + 1);
     this.currentPage = event.page + 1;
-=======
->>>>>>> 3f599c3dda9e56fac44f882d7a9835c285a4d5f6
     this.loading = true;
     this.restaurantsServ.getAllRestaurants(this.currentPage, this.limit).subscribe(
       (data: any) => this.onSuccessGetRestaurants(data),
@@ -141,7 +115,6 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
     this.restaurantsArr = restData.data;
     this.totalItems = restData.total;
     this.loading = false;
-<<<<<<< HEAD
     this.limit = restData.per_page;
     this.messageService.add({severity: 'success', summary: 'Success', detail: 'Successfully loaded restaurants!' });
     if (this.initialLoadComplete) {
@@ -150,9 +123,6 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
     if (!this.initialLoadComplete) {
       this.initialLoadComplete = true;
     }
-=======
-    this.messageService.add({severity: 'success', summary: 'Success', detail: 'Successfully loaded restaurants!'});
->>>>>>> 3f599c3dda9e56fac44f882d7a9835c285a4d5f6
   }
 
   submitForm(restaurant: Restaurant) {
