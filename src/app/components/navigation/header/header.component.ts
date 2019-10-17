@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.refreshMenuOnChanges();
+    this.checkIfLoggedIn();
   }
 
   showDialog() {
@@ -54,9 +55,20 @@ export class HeaderComponent implements OnInit, OnChanges {
 
   isAuthenticated() {
     if (localStorage.getItem('token')) {
+      if (!this.user) {
+        this.userService.getCurrentUser().subscribe(
+          (data) => this.onSuccessGetUser(data),
+          (err)  => this.onError(err)
+        );
+      }
       return true;
     }
     return false;
+  }
+
+  onSuccessGetUser(data) {
+    this.user = data;
+    localStorage.setItem('user', JSON.stringify(this.user));
   }
 
   logout() {

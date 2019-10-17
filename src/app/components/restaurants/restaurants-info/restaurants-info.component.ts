@@ -1,10 +1,11 @@
-import { Component, OnInit, SimpleChanges, OnChanges, OnDestroy } from '@angular/core';
+import { Component, OnInit, SimpleChanges, OnChanges, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Restaurant } from 'src/app/models/restaurant.model';
 import { MessageService } from 'primeng/api';
 import { RestaurantsService } from 'src/app/services/restaurants.service';
 import { fadeInOut } from '../../../animations/animation/animation.component';
 
 import * as _ from 'lodash';
+import { Paginator } from 'primeng/paginator';
 
 @Component({
   selector: 'app-rest-info',
@@ -24,7 +25,8 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
   selectedPerPage: any;
   itemsPerPageDropdown:  any[]        = [];
   loading = false;
-
+  @ViewChild('dt', {static: false}) dt: Paginator;
+  initialLoadComplete = false;
 
   constructor(private messageService:  MessageService,
               private restaurantsServ: RestaurantsService) { }
@@ -106,6 +108,7 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
 
   updatePage(event) {
     const page = Number(event.page + 1);
+    this.currentPage = event.page + 1;
     this.loading = true;
     this.restaurantsServ.getAllRestaurants(page, this.limit).subscribe(
       (data: any) => this.onSuccessGetRestaurants(data),
@@ -121,6 +124,12 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
     this.loading = false;
     this.limit = restData.per_page;
     this.messageService.add({severity: 'success', summary: 'Success', detail: 'Successfully loaded restaurants!' });
+    if (this.initialLoadComplete) {
+      this.dt.first = restData.from;
+    }
+    if (!this.initialLoadComplete) {
+      this.initialLoadComplete = true;
+    }
   }
 
   submitForm(restaurant: Restaurant) {

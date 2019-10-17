@@ -28,7 +28,7 @@
         </a>
         <a class="py-2 d-none d-md-inline-block username" *ngIf="isAuthenticated()">
             <fa-icon [icon]="faUserTie"></fa-icon>
-            <span class="span-user">Username: {{ user.email }} </span>
+            <span class="span-user">Username: {{ user?.email }} </span>
         </a>
         <a class="py-2 d-none d-md-inline-block float-right" *ngIf="isAuthenticated()" (click)="logout()">
             <fa-icon [icon]="faSignOutAlt"></fa-icon>
