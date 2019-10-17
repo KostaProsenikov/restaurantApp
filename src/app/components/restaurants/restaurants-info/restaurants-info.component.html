@@ -13,7 +13,7 @@
 
     <div class="items">
       <label>Items Per Page: </label>
-      <p-dropdown [(ngModel)]="selectedPerPage" (ngModelChange)="updateLimit($event)" [options]="itemsPerPageDropdown"
+      <p-dropdown [(ngModel)]="selectedPerPageDropdown" (ngModelChange)="updateLimit($event)" [options]="itemsPerPageDropdown"
         optionLabel="label">
       </p-dropdown>
     </div>

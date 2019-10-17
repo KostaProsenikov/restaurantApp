@@ -110,6 +110,15 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
     );
   }
 
+  updateLimit(event) {
+    this.limit = event.value.id;
+    this.loading = true;
+    this.restaurantsServ.getAllRestaurants(this.currentPage, this.limit).subscribe(
+      (data: any) => this.onSuccessGetRestaurants(data),
+      (err) => this.onError(err)
+    );
+  }
+
   onSuccessGetRestaurants(restData: any) {
     this.initialRestaurantsArr = _.cloneDeep(restData.data);
     this.restaurantsArr = restData.data;
