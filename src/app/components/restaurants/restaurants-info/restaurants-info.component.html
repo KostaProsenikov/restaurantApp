@@ -11,13 +11,13 @@
 
       <div class="items">
         <label>Items Per Page: </label>
-        <p-dropdown [(ngModel)]="selectedPerPage" (ngModelChange)="updateLimit($event)"
+        <p-dropdown [(ngModel)]="selectedPerPageDropdown" (ngModelChange)="getRestaurantsData($event)"
                     [options]="itemsPerPageDropdown" optionLabel="label">
         </p-dropdown>
       </div>
 
     </div>
-    <p-paginator [rows]="limit" [totalRecords]="totalItems" (onPageChange)="updatePage($event)"></p-paginator>
+    <p-paginator [rows]="limit" [totalRecords]="totalItems" (onPageChange)="getRestaurantsData($event)"></p-paginator>
 
     <ng-container *ngFor="let restaurant of restaurantsArr">
       <p-card header="#{{ restaurant.id }} - {{ restaurant.title | truncate }}" styleClass="ui-card-shadow"
