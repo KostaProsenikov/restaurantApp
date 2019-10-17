@@ -93,29 +93,17 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  getRestaurantsData() {
+  getRestaurantsData(event?) {
+
+    if (event !== undefined) {
+      this.currentPage = event.page !== undefined ? Number(event.page + 1) : this.currentPage;
+      this.limit = event.value !== undefined ? Number(event.value.id) : this.limit;
+    }
+
     this.loading = true;
     this.restaurantsServ.getAllRestaurants(this.currentPage, this.limit).subscribe(
       (data: any) => this.onSuccessGetRestaurants(data),
       (err)       => this.onError(err)
-    );
-  }
-
-  updatePage(event) {
-    this.currentPage = event.page + 1;
-    this.loading = true;
-    this.restaurantsServ.getAllRestaurants(this.currentPage, this.limit).subscribe(
-      (data: any) => this.onSuccessGetRestaurants(data),
-      (err) => this.onError(err)
-    );
-  }
-
-  updateLimit(event) {
-    this.limit = event.value.id;
-    this.loading = true;
-    this.restaurantsServ.getAllRestaurants(this.currentPage, this.limit).subscribe(
-      (data: any) => this.onSuccessGetRestaurants(data),
-      (err) => this.onError(err)
     );
   }
 

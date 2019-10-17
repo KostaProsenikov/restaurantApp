@@ -3,7 +3,7 @@
     <p-progressSpinner></p-progressSpinner>
   </ng-container>
   <p-paginator [rows]="limit" *ngIf="initialLoadComplete" #dt [totalRecords]="totalItems"
-    (onPageChange)="updatePage($event)">
+    (onPageChange)="getRestaurantsData($event)">
   </p-paginator>
   <div class="pagination" *ngIf="initialLoadComplete">
     <div class="information">
@@ -13,7 +13,7 @@
 
     <div class="items">
       <label>Items Per Page: </label>
-      <p-dropdown [(ngModel)]="selectedPerPageDropdown" (ngModelChange)="updateLimit($event)" [options]="itemsPerPageDropdown"
+      <p-dropdown [(ngModel)]="selectedPerPageDropdown" (ngModelChange)="getRestaurantsData($event)" [options]="itemsPerPageDropdown"
         optionLabel="label">
       </p-dropdown>
     </div>
