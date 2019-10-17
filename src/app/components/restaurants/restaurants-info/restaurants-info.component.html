@@ -3,7 +3,7 @@
     <p-progressSpinner></p-progressSpinner>
   </ng-container>
   <p-paginator [rows]="limit" *ngIf="initialLoadComplete" #dt [totalRecords]="totalItems"
-    (onPageChange)="getRestaurantsData($event)">
+               (onPageChange)="getRestaurantsData($event)">
   </p-paginator>
   <div class="pagination" *ngIf="initialLoadComplete">
     <div class="information">
@@ -13,16 +13,42 @@
 
     <div class="items">
       <label>Items Per Page: </label>
-      <p-dropdown [(ngModel)]="selectedPerPageDropdown" (ngModelChange)="getRestaurantsData($event)" [options]="itemsPerPageDropdown"
-        optionLabel="label">
+      <p-dropdown [(ngModel)]="selectedPerPageDropdown" (ngModelChange)="getRestaurantsData($event)"
+                  [options]="itemsPerPageDropdown"
+                  optionLabel="label">
       </p-dropdown>
     </div>
   </div>
 
   <div class="cards" *ngIf="!loading && restaurantsArr && restaurantsArr.length">
+
+    <form (ngSubmit)="submitCreateForm()">
+      <p-card styleClass="ui-card-shadow">
+        <p-header>
+          <h2>Restaurant: </h2>
+          <img src="/assets/pictures/usercard.png">
+        </p-header>
+        <div class="row">
+          <label for="title-create" class="col-md-3"> Name: </label>
+          <input type="text" id="title-create" class="col-md-8"
+                 [(ngModel)]="title"
+                 [ngModelOptions]="{standalone: true}"/>
+        </div>
+        <div class="row">
+          <label for="opinion-create" class="col-md-3">Opinion: </label>
+          <textarea id="opinion-create" class="col-md-8"
+                    [(ngModel)]="opinion"
+                    [ngModelOptions]="{standalone: true}">
+              </textarea>
+        </div>
+        <p-footer>
+          <button class="btn btn-primary btn-block" type="submit">Create</button>
+        </p-footer>
+      </p-card>
+    </form>
     <ng-container *ngFor="let restaurant of restaurantsArr">
       <p-card header="#{{ restaurant.id }} - {{ restaurant.title | truncate }}" styleClass="ui-card-shadow"
-        [@fadeInOut]>
+              [@fadeInOut]>
         <p-header>
           <h2>Restaurant: </h2>
           <img src="/assets/pictures/usercard.png">
@@ -30,23 +56,24 @@
         <div class="row">
           <label for="title" class="col-md-3"> Name: </label>
           <input type="text" id="title" class="col-md-8" name="title" pInputText [(ngModel)]="restaurant.title"
-            (ngModelChange)="checkForm(restaurant.id)" />
+                 (ngModelChange)="checkForm(restaurant.id)"/>
         </div>
         <div class="row">
           <label for="opinion" class="col-md-3">Opinion: </label>
           <textarea name="opinion" id="opinion" class="col-md-8" pInputTextarea [(ngModel)]="restaurant.opinion"
-            (ngModelChange)="checkForm(restaurant.id)">
+                    (ngModelChange)="checkForm(restaurant.id)">
             </textarea>
         </div>
         <p-footer>
           <button pButton type="button" [disabled]="checkDisabled(restaurant.id) || checkNotTouched(restaurant.id)"
-            label="Save" icon="pi pi-check" (click)="submitForm(restaurant)" style="margin-right: .25em">
+                  label="Save" icon="pi pi-check" (click)="submitForm(restaurant)" style="margin-right: .25em">
           </button>
           <button pButton type="button" label="Delete" class="ui-button-danger"
-            (click)="deleteRestaurant(restaurant.id)" style="margin-right: .25em">
+                  (click)="deleteRestaurant(restaurant.id)" style="margin-right: .25em">
           </button>
         </p-footer>
       </p-card>
     </ng-container>
   </div>
 </div>
+

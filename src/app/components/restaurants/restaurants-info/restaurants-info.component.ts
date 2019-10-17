@@ -13,7 +13,6 @@ import { Paginator } from 'primeng/paginator';
   animations: [fadeInOut]
 })
 export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
-  title = 'Restaurants Review App';
   initialRestaurantsArr: Restaurant[]  = [];
   restaurantsArr: Restaurant[]         = [];
   isDisabledArr: number[]              = [];
@@ -23,22 +22,18 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
   selectedPerPageDropdown: any;
   itemsPerPageDropdown: any[]          = [];
   loading =                           false;
-  showAdditionalInfo: boolean;
   @ViewChild('dt', {static: false}) dt: Paginator;
   initialLoadComplete = false;
+  title = '';
+  opinion = '';
 
   constructor(private messageService: MessageService,
               private restaurantsServ: RestaurantsService) {
   }
 
   ngOnInit() {
-    this.showAdditionalInfo = false;
     this.getRestaurantsData();
     this.fillDropdownArray();
-  }
-
-  showSomething() {
-    this.showAdditionalInfo = !this.showAdditionalInfo;
   }
 
   fillDropdownArray() {
@@ -48,7 +43,6 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
       {label: '100', value: {id: 100}},
     ];
   }
-
 
   checkForm(id: number) {
     const restaurant = this.restaurantsArr.filter((rest: Restaurant) => rest.id === id)[0];
@@ -85,10 +79,7 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
   onSuccessDeleteRestaurant(data, id) {
     if (data && data.message) {
       this.restaurantsArr = this.restaurantsArr.filter((rest: Restaurant) => rest.id !== id);
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Success',
-        detail: `Successfully deleted restaurant with ${id}!`
+      this.messageService.add({severity: 'success', summary: 'Success', detail: `Successfully deleted restaurant with ${id}!`
       });
     }
   }
@@ -112,7 +103,6 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
     this.restaurantsArr = restData.data;
     this.totalItems = restData.total;
     this.loading = false;
-    this.limit = restData.per_page;
     this.messageService.add({severity: 'success', summary: 'Success', detail: 'Successfully loaded restaurants!' });
     if (this.initialLoadComplete) {
       this.dt.first = restData.from;
@@ -129,11 +119,40 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
     );
   }
 
+  submitCreateForm() {
+    const validate = this.validateForm();
+    if (validate) {
+      const createRestObj = {
+        title: this.title,
+        opinion: this.opinion
+      };
+      this.restaurantsServ.createRestaurant(createRestObj).subscribe(
+        (data) => this.onSuccessCreateRestaurant(data),
+        (err) => this.onError(err)
+      );
+    } else {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please fill in both title and password opinion!' });
+    }
+  }
+
+  validateForm() {
+    if ((this.title && this.title.length < 3) || (this.opinion.length && this.opinion.length < 4)) {
+      return false;
+    }
+    return true;
+  }
+
   onSuccessUpdateRestaurant(restaurant: Restaurant) {
     this.messageService.add({
       severity: 'success',
       summary: 'Success',
       detail: `Successfully updated ${restaurant.title}!`
+    });
+  }
+
+  onSuccessCreateRestaurant(data) {
+    this.ngOnInit();
+    this.messageService.add({severity: 'success', summary: 'Success', detail: `Successfully created ${data.title}!`
     });
   }
 

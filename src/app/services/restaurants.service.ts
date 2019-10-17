@@ -32,6 +32,11 @@ export class RestaurantsService {
     return this.http.post(this.mainUrl + `restaurants/${id}`, restaurant, { headers: this.requestOptions});
   }
 
+  createRestaurant(data): Observable<any> {
+    this.setApiToken();
+    return this.http.post(this.mainUrl + `restaurants`, data, { headers: this.requestOptions});
+  }
+
   deleteRestaurant(id: number) {
     this.setApiToken();
     return this.http.delete(this.mainUrl + `restaurants/${id}`, { headers: this.requestOptions});
