@@ -3,7 +3,6 @@
 $white-color: #D8D8D8;
 
 .grid {
-    // max-width: 13%;
     display: inline-flex;
 }
 
@@ -39,8 +38,8 @@ p-dropdown ::ng-deep {
         margin-bottom: 15px;
 
         .ui-card {
-            height: 507px !important;
-            width: 360px !important;
+            height: 580px;
+            width: 360px;
         }
 
         .ui-card-shadow {
@@ -115,12 +114,18 @@ p-paginator ::ng-deep {
 }
 
 p-dialog ::ng-deep {
+
+    .ui-dialog-titlebar {
+        background-color: $background-color;
+        color: $secondary-color;
+    }
+    
     p-card {
         width: 98%;
         .ui-card-shadow {
             padding: 5px;
-            width: 377px !important;
-            height: 518px !important;
+            width: 377px;
+            height: 569px;
         }
 
         .ui-card-content {
@@ -131,7 +136,7 @@ p-dialog ::ng-deep {
     }
 
     .ui-dialog-content {
-        height: 531px;
+        height: 587px;
         padding: 8px;
         overflow: hidden;
     }
