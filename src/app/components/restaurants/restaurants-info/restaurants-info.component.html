@@ -2,6 +2,7 @@
   <ng-container *ngIf="loading">
     <p-progressSpinner></p-progressSpinner>
   </ng-container>
+  <button type="button" (click)="showDialog()" class="create-restaurant" pButton label="Create Restaurant"></button>
   <p-paginator [rows]="limit" *ngIf="initialLoadComplete" #dt [totalRecords]="totalItems"
                (onPageChange)="getRestaurantsData($event)">
   </p-paginator>
@@ -20,22 +21,21 @@
     </div>
   </div>
 
-  <div class="cards" *ngIf="!loading && restaurantsArr && restaurantsArr.length">
-
+  <p-dialog header="Create Restaurant" [(visible)]="display">
     <form (ngSubmit)="submitCreateForm()">
       <p-card styleClass="ui-card-shadow">
         <p-header>
-          <h2>Restaurant: </h2>
+          <h2>Create Restaurant: </h2>
           <img src="/assets/pictures/usercard.png">
         </p-header>
         <div class="row">
-          <label for="title-create" class="col-md-3"> Name: </label>
+          <label for="title-create" class="col-md-3"> Restaurant name: </label>
           <input type="text" id="title-create" class="col-md-8"
                  [(ngModel)]="title"
                  [ngModelOptions]="{standalone: true}"/>
         </div>
         <div class="row">
-          <label for="opinion-create" class="col-md-3">Opinion: </label>
+          <label for="opinion-create" class="col-md-3">Restaurant opinion: </label>
           <textarea id="opinion-create" class="col-md-8"
                     [(ngModel)]="opinion"
                     [ngModelOptions]="{standalone: true}">
@@ -46,6 +46,10 @@
         </p-footer>
       </p-card>
     </form>
+ </p-dialog>
+
+  <div class="cards" *ngIf="!loading && restaurantsArr && restaurantsArr.length">
+
     <ng-container *ngFor="let restaurant of restaurantsArr">
       <p-card header="#{{ restaurant.id }} - {{ restaurant.title | truncate }}" styleClass="ui-card-shadow"
               [@fadeInOut]>

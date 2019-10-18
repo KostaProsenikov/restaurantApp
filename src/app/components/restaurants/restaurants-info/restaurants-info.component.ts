@@ -26,6 +26,7 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
   initialLoadComplete = false;
   title = '';
   opinion = '';
+  display: boolean;
 
   constructor(private messageService: MessageService,
               private restaurantsServ: RestaurantsService) {
@@ -131,8 +132,12 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
         (err) => this.onError(err)
       );
     } else {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please fill in both title and password opinion!' });
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please fill in both title and opinion fields!' });
     }
+  }
+
+  showDialog() {
+    this.display = true;
   }
 
   validateForm() {
