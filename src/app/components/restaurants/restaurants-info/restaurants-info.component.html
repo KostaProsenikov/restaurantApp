@@ -29,20 +29,20 @@
           <img src="/assets/pictures/usercard.png">
         </p-header>
         <div class="row">
-          <label for="title-create" class="col-md-3"> Restaurant name: </label>
+          <label for="title-create" class="col-md-3">Restaurant name: </label>
           <input type="text" id="title-create" class="col-md-8"
-                 [(ngModel)]="title"
-                 [ngModelOptions]="{standalone: true}"/>
+            [(ngModel)]="title"
+            [ngModelOptions]="{standalone: true}"/>
         </div>
         <div class="row">
           <label for="opinion-create" class="col-md-3">Restaurant opinion: </label>
           <textarea id="opinion-create" class="col-md-8"
-                    [(ngModel)]="opinion"
-                    [ngModelOptions]="{standalone: true}">
-              </textarea>
+            [(ngModel)]="opinion"
+            [ngModelOptions]="{standalone: true}">
+          </textarea>
         </div>
         <p-footer>
-          <button class="btn btn-primary btn-block" type="submit">Create</button>
+          <button class="btn btn-primary btn-block" [disabled]="" type="submit">Create</button>
         </p-footer>
       </p-card>
     </form>

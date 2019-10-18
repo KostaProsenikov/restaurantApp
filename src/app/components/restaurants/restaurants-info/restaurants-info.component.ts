@@ -86,8 +86,7 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getRestaurantsData(event?) {
-
-    if (event !== undefined) {
+    if (event) {
       this.currentPage = event.page !== undefined ? Number(event.page + 1) : this.currentPage;
       this.limit = event.value !== undefined ? Number(event.value.id) : this.limit;
     }
@@ -141,7 +140,7 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   validateForm() {
-    if ((this.title && this.title.length < 3) || (this.opinion.length && this.opinion.length < 4)) {
+    if ((this.title.length < 3) || (this.opinion.length < 4)) {
       return false;
     }
     return true;
@@ -156,9 +155,11 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   onSuccessCreateRestaurant(data) {
-    this.ngOnInit();
-    this.messageService.add({severity: 'success', summary: 'Success', detail: `Successfully created ${data.title}!`
-    });
+    this.display = false;
+    this.messageService.add({severity: 'success', summary: 'Success',
+      detail: `Successfully created ${data.title}!`});
+    this.getRestaurantsData();
+    this.title = this.opinion = '';
   }
 
   onError(err: any) {

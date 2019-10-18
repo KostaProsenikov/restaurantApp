@@ -3,7 +3,7 @@
 $white-color: #D8D8D8;
 
 .grid {
-    max-width: 13%;
+    // max-width: 13%;
     display: inline-flex;
 }
 
@@ -35,7 +35,6 @@ p-dropdown ::ng-deep {
     position: absolute;
 
     p-card ::ng-deep {
-        width: 13%;
         display: inline-flex;
         margin-bottom: 15px;
 
@@ -48,6 +47,13 @@ p-dropdown ::ng-deep {
             position: relative;
             margin-right: 30px;
             background-color: currentColor;
+        }
+
+        .ui-card-footer {
+            margin-top: -19px;
+            position: absolute;
+            width: 200px;
+            right: -32px;
         }
     }
 }
@@ -132,7 +138,7 @@ p-dialog ::ng-deep {
 
     button.btn-primary {
         position: absolute;
-        margin-top: -26px;
+        margin-top: -45px;
         width: 98px;
         margin-left: -108px;
     }
@@ -158,5 +164,5 @@ p-progressSpinner ::ng-deep {
 }
 
 textarea {
-    height: 175px;
+    height: 135px;
 }
