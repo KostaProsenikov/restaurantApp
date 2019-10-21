@@ -70,7 +70,7 @@
         </div>
         <p-footer>
           <button pButton type="button" [disabled]="checkDisabled(restaurant.id) || checkNotTouched(restaurant.id)"
-                  label="Save" icon="pi pi-check" (click)="submitForm(restaurant)" style="margin-right: .25em">
+                  label="Save" icon="pi pi-check" (click)="submitUpdateForm(restaurant)" style="margin-right: .25em">
           </button>
           <button pButton type="button" label="Delete" class="ui-button-danger"
                   (click)="deleteRestaurant(restaurant.id)" style="margin-right: .25em">

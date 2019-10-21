@@ -112,7 +112,7 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  submitForm(restaurant: Restaurant) {
+  submitUpdateForm(restaurant: Restaurant) {
     this.restaurantsServ.updateRestaurant(restaurant, restaurant.id).subscribe(
       (data: any) => this.onSuccessUpdateRestaurant(data),
       (err: any) => this.onError(err)

@@ -1,1 +1,42 @@
-<p>register works!</p>
+<div class="row">
+  <form class="form-register col-md-5" #registerForm="ngForm" (ngSubmit)="onSubmitRegister()" >
+
+    <h1 class="h3 mb-3 font-weight-normal form-title">Register To Restaurants App</h1>
+
+    <label for="inputUsername" class="sr-only">Username</label>
+    <input type="email"
+           id="inputUsername"
+           [(ngModel)]="username" [ngModelOptions]="{standalone: true}"
+           class="form-control"
+           placeholder="Username"
+           required=""
+           autofocus="">
+
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="email"
+           id="inputEmail"
+           [(ngModel)]="email" [ngModelOptions]="{standalone: true}"
+           class="form-control"
+           placeholder="Email address"
+           required=""
+           autofocus="">
+
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword"
+           [(ngModel)]="password" [ngModelOptions]="{standalone: true}"
+           class="form-control"
+           placeholder="Password"
+           required="">
+
+    <label for="inputPasswordConfirmation" class="sr-only">Password confirmation</label>
+    <input type="password" id="inputPasswordConfirmation"
+           [(ngModel)]="passwordConfirmation" [ngModelOptions]="{standalone: true}"
+           class="form-control"
+           placeholder="Confirm password"
+           required="">
+
+    <button class="btn btn-lg btn-warning btn-block" type="submit">Register now</button>
+
+    <p class="mt-5 mb-3 text-muted">© 2019</p>
+  </form>
+</div>
