@@ -1,13 +1,14 @@
-import { Pipe, PipeTransform } from '@angular/core';
+/* eslint-disable no-magic-numbers */
+import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-  name: 'truncate'
+  name: "truncate"
 })
 export class TruncatePipe implements PipeTransform {
-  transform(value: string, limit = 15, completeWords = true, ellipsis = '...') {
+  transform(value: string, limit = 15, completeWords = true, ellipsis = "...") {
     if (completeWords) {
-      limit = value.substr(0, limit).lastIndexOf(' ');
+      limit = value.substring(0, limit).lastIndexOf(" ");
     }
-    return `${value.substr(0, limit)}${ellipsis}`;
+    return `${value.substring(0, limit)}${ellipsis}`;
   }
 }

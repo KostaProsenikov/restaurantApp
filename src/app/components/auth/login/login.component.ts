@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
-import { AuthService } from 'src/app/services/auth.service';
-import { Router } from '@angular/router';
-import { User } from 'src/app/models/user.model';
-import { UsersService } from 'src/app/services/users.service';
+/* eslint-disable no-magic-numbers */
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @angular-eslint/no-empty-lifecycle-method */
+import { Component, OnInit } from "@angular/core";
+import { MessageService } from "primeng/api";
+import { AuthService } from "src/app/services/auth.service";
+import { Router } from "@angular/router";
+import { User } from "src/app/models/user.model";
+import { UsersService } from "src/app/services/users.service";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
 
-  username = '';
-  password = '';
+  username = "";
+  password = "";
   rememberMe = false;
 
 
@@ -22,8 +25,7 @@ export class LoginComponent implements OnInit {
               private userService: UsersService,
               private router: Router) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   validateForm() {
     if ((this.username && this.username.length < 3) || (this.password.length && this.password.length < 4)) {
@@ -44,12 +46,12 @@ export class LoginComponent implements OnInit {
         (err) => this.onError(err)
       );
     } else {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please fill in both username and password fields!' });
+      this.messageService.add({ severity: "error", summary: "Error", detail: "Please fill in both username and password fields!" });
     }
   }
 
   onSuccessGetLoginData(data: any) {
-    localStorage.setItem('token', data.access_token);
+    localStorage.setItem("token", data.access_token);
     this.getUserData();
   }
 
@@ -61,15 +63,15 @@ export class LoginComponent implements OnInit {
   }
 
   onSuccessGetUser(user: User) {
-    localStorage.setItem('user', JSON.stringify(user));
-    this.router.navigateByUrl('/');
+    localStorage.setItem("user", JSON.stringify(user));
+    this.router.navigateByUrl("/");
     this.userService.refreshNavigationMenu.next(true);
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Successfully logged in!' });
+    this.messageService.add({ severity: "success", summary: "Success", detail: "Successfully logged in!" });
   }
 
 
   onError(err: any) {
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Login error! Unauthorized!' });
+    this.messageService.add({ severity: "error", summary: "Error", detail: "Login error! Unauthorized!" });
   }
 
 }

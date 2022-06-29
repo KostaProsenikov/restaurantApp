@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class AuthService {
 
-  mainUrl = 'http://localhost:8000/api/';
+  mainUrl = "http://localhost:8000/api/";
 
   constructor(
     private http: HttpClient) {
@@ -16,10 +16,10 @@ export class AuthService {
 
 
   login(data): Observable<any> {
-    return this.http.post(this.mainUrl + 'login/', data);
+    return this.http.post(`${this.mainUrl  }login/`, data);
   }
 
-  register(data) :Observable<any> {
-    return this.http.post(this.mainUrl + 'signup/', data);
+  register(data): Observable<any> {
+    return this.http.post(`${this.mainUrl  }signup/`, data);
   }
 }

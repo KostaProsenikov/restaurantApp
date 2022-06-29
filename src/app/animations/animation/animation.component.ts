@@ -1,8 +1,9 @@
-import { trigger, state, style, animate, transition } from '@angular/animations';
+/* eslint-disable no-magic-numbers */
+import { trigger, state, style, animate, transition } from "@angular/animations";
 
-export const fadeInOut = trigger('fadeInOut', [
-  state('void', style({
+export const fadeInOut = trigger("fadeInOut", [
+  state("void", style({
     opacity: 0
   })),
-  transition('void <=> *', animate(500)),
+  transition("void <=> *", animate(500))
 ]);

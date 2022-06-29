@@ -1,16 +1,17 @@
-import { Component, OnInit, SimpleChanges, OnChanges } from '@angular/core';
-import { faHome, faUtensils, faSignInAlt, faBriefcase, faSignOutAlt, faSearchDollar } from '@fortawesome/free-solid-svg-icons';
-import { faUserTie } from '@fortawesome/free-solid-svg-icons';
-import { User } from 'src/app/models/user.model';
-import { UsersService } from 'src/app/services/users.service';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { faHome, faUtensils, faSignInAlt, faBriefcase, faSignOutAlt, faSearchDollar } from "@fortawesome/free-solid-svg-icons";
+import { faUserTie } from "@fortawesome/free-solid-svg-icons";
+import { User } from "src/app/models/user.model";
+import { UsersService } from "src/app/services/users.service";
+import { Router } from "@angular/router";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  selector: "app-header",
+  templateUrl: "./header.component.html",
+  styleUrls: ["./header.component.scss"]
 })
-export class HeaderComponent implements OnInit, OnChanges {
+export class HeaderComponent implements OnInit {
   display = false;
   faHome         = faHome;
   faSignInAlt    = faSignInAlt;
@@ -44,22 +45,18 @@ export class HeaderComponent implements OnInit, OnChanges {
   }
 
   checkIfLoggedIn() {
-    if (localStorage.getItem('user')) {
-      this.user = JSON.parse(localStorage.getItem('user'));
+    if (localStorage.getItem("user")) {
+      this.user = JSON.parse(localStorage.getItem("user"));
     }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-
-  }
-
   isAuthenticated() {
-    if (localStorage.getItem('token')) {
+    if (localStorage.getItem("token")) {
       if (!this.user) {
-        this.userService.getCurrentUser().subscribe(
-          (data) => this.onSuccessGetUser(data),
-          (err)  => this.onError(err)
-        );
+        this.userService.getCurrentUser().subscribe({
+          next: (data) => this.onSuccessGetUser(data),
+          error: (err)  => this.onError(err)
+        });
       }
       return true;
     }
@@ -68,25 +65,25 @@ export class HeaderComponent implements OnInit, OnChanges {
 
   onSuccessGetUser(data) {
     this.user = data;
-    localStorage.setItem('user', JSON.stringify(this.user));
+    localStorage.setItem("user", JSON.stringify(this.user));
   }
 
   logout() {
-    this.userService.logout().subscribe(
-      (data: any) => this.onSuccessLogout(data),
-      (err: any)  => this.onError(err)
-    );
+    this.userService.logout().subscribe({
+     next:(data: any) => this.onSuccessLogout(data),
+     error: (err: any)  => this.onError(err)
+    });
   }
 
-  onError(err) {
-    console.log('Error', err.message);
+  onError(err: HttpErrorResponse) {
+    console.log("Error", err.message);
   }
 
-  onSuccessLogout(data) {
+  onSuccessLogout(data: any) {
     if (data) {
-      localStorage.removeItem('user');
-      localStorage.removeItem('token');
-      this.router.navigateByUrl('login');
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      this.router.navigateByUrl("login");
     }
   }
 

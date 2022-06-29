@@ -1,33 +1,35 @@
-import { Component, OnInit, SimpleChanges, OnChanges, OnDestroy, ViewChild } from '@angular/core';
-import { Restaurant } from 'src/app/models/restaurant.model';
-import { MessageService } from 'primeng/api';
-import { RestaurantsService } from 'src/app/services/restaurants.service';
-import { fadeInOut } from '../../../animations/animation/animation.component';
-import * as _ from 'lodash';
-import { Paginator } from 'primeng/paginator';
-import { Subscription } from 'rxjs';
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable no-magic-numbers */
+import { Component, OnInit, SimpleChanges, OnChanges, OnDestroy, ViewChild } from "@angular/core";
+import { Restaurant } from "src/app/models/restaurant.model";
+import { MessageService } from "primeng/api";
+import { RestaurantsService } from "src/app/services/restaurants.service";
+import { fadeInOut } from "../../../animations/animation/animation.component";
+import * as _ from "lodash";
+import { Paginator } from "primeng/paginator";
+import { Subscription } from "rxjs";
 
 @Component({
-  selector: 'app-rest-info',
-  templateUrl: './restaurants-info.component.html',
-  styleUrls: ['./restaurants-info.component.scss'],
+  selector: "app-rest-info",
+  templateUrl: "./restaurants-info.component.html",
+  styleUrls: ["./restaurants-info.component.scss"],
   animations: [fadeInOut]
 })
-export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
-  @ViewChild('dt', {static: false}) dt: Paginator;
+export class RestaurantsInfoComponent implements OnInit, OnDestroy {
+  @ViewChild("dt", {static: false}) dt: Paginator;
 
   public currentPage                          = 1;
-  public display: boolean                     = false;
+  public display                     = false;
   public initialRestaurantsArr: Restaurant[]  = [];
   public initialLoadComplete                  = false;
   public itemsPerPageDropdown: any[]          = [];
-  public limit: number                        = 20;
-  public loading: boolean                     = false;
-  public opinion                              = '';
+  public limit                        = 20;
+  public loading                     = false;
+  public opinion                              = "";
   public restaurantsArr: Restaurant[]         = [];
-  public selectedPerPageDropdown: string      = '';
-  public title: string                        = '';
-  public totalItems: number                   = 0;
+  public selectedPerPageDropdown      = "";
+  public title                        = "";
+  public totalItems                   = 0;
   private isDisabledArr: number[]             = [];
   private createRestSubscr: Subscription;
 
@@ -42,9 +44,9 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
 
   public fillDropdownArray() {
     this.itemsPerPageDropdown = [
-      {label: '20', value: {id: 20}},
-      {label: '50', value: {id: 50}},
-      {label: '100', value: {id: 100}},
+      {label: "20", value: {id: 20}},
+      {label: "50", value: {id: 50}},
+      {label: "100", value: {id: 100}}
     ];
   }
 
@@ -83,7 +85,7 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
   private onSuccessDeleteRestaurant(data, id) {
     if (data && data.message) {
       this.restaurantsArr = this.restaurantsArr.filter((rest: Restaurant) => rest.id !== id);
-      this.messageService.add({severity: 'success', summary: 'Success', detail: `Successfully deleted restaurant with ${id}!`
+      this.messageService.add({severity: "success", summary: "Success", detail: `Successfully deleted restaurant with ${id}!`
       });
     }
   }
@@ -106,7 +108,7 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
     this.restaurantsArr = restData.data;
     this.totalItems = restData.total;
     this.loading = false;
-    this.messageService.add({severity: 'success', summary: 'Success', detail: 'Successfully loaded restaurants!' });
+    this.messageService.add({severity: "success", summary: "Success", detail: "Successfully loaded restaurants!" });
     if (this.initialLoadComplete) {
       this.dt.first = restData.from;
     }
@@ -135,7 +137,7 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
         error: (err) => this.onError(err)
     });
     } else {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please fill in both title and opinion fields!' });
+      this.messageService.add({ severity: "error", summary: "Error", detail: "Please fill in both title and opinion fields!" });
     }
   }
 
@@ -152,25 +154,22 @@ export class RestaurantsInfoComponent implements OnInit, OnChanges, OnDestroy {
 
   private onSuccessUpdateRestaurant(restaurant: Restaurant) {
     this.messageService.add({
-      severity: 'success',
-      summary: 'Success',
+      severity: "success",
+      summary: "Success",
       detail: `Successfully updated ${restaurant.title}!`
     });
   }
 
   private onSuccessCreateRestaurant(data: any) {
     this.display = false;
-    this.messageService.add({severity: 'success', summary: 'Success',
+    this.messageService.add({severity: "success", summary: "Success",
       detail: `Successfully created ${data.title}!`});
     this.getRestaurantsData();
-    this.title = this.opinion = '';
+    this.title = this.opinion = "";
   }
 
   private onError(err: any) {
-    this.messageService.add({severity: 'error', summary: 'Error', detail: err.message});
-  }
-
-  public ngOnChanges(_changes: SimpleChanges): void {
+    this.messageService.add({severity: "error", summary: "Error", detail: err.message});
   }
 
   public ngOnDestroy(): void {
